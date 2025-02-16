@@ -44,7 +44,7 @@ echo "Ollama process started with PID $OLLAMA_PID"
 START_PROMETHEUS=${2:-true}
 if [ "$START_PROMETHEUS" = true ]; then
     # Run the Prometheus server in a separate process
-    prometheus --config.file="d:/repositories/chatbot-experimenting/prometheus.yml" &
+    prometheus --config.file="./prometheus.yml" &
     PROMETHEUS_PID=$!
     echo "Prometheus process started with PID $PROMETHEUS_PID"
 fi
