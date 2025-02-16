@@ -6,7 +6,7 @@ This project is a FastAPI server that integrates with Ollama's Python API to pro
 
 - Python 3.10+
 - `pip` (Python package installer)
-- Ollama CLI
+- Ollama
 
 ## Installation
 
@@ -17,7 +17,7 @@ This project is a FastAPI server that integrates with Ollama's Python API to pro
     ```
 
 2. Install the Ollama CLI:
-    Follow the instructions on the [Ollama website](https://ollama.com) to install the Ollama CLI.
+    Follow the instructions on the [Ollama website](https://ollama.com) to install Ollama
 
 3. Create and activate a virtual environment, and install the dependencies:
     ```sh
