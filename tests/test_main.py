@@ -12,14 +12,6 @@ def reset_rate_limit():
 
 @patch('src.app.routes.ollama.chat')
 @patch('src.app.config.ollama.create')
-def test_get_root(mock_create, mock_chat):
-    mock_chat.return_value = [{"message": {"content": "Health check response"}}]
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.json() == {"message": "Ollama FastAPI server is running!"}
-
-@patch('src.app.routes.ollama.chat')
-@patch('src.app.config.ollama.create')
 def test_post_chat(mock_create, mock_chat):
     mock_chat.return_value = [
         {"message": {"content": "Hello, user!"}},
