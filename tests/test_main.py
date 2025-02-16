@@ -1,6 +1,5 @@
 from fastapi.testclient import TestClient
 from src.app.main import app
-from src.app.models import PromptRequest
 import pytest
 import responses
 from unittest.mock import patch

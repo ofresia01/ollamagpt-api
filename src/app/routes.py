@@ -1,8 +1,7 @@
-from fastapi import APIRouter, HTTPException, Request, Header
-from fastapi.responses import JSONResponse, StreamingResponse
-from slowapi.errors import RateLimitExceeded
+from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import StreamingResponse
 import ollama
-from typing import AsyncGenerator, Optional
+from typing import AsyncGenerator
 from .config import logger, MODEL_NAME, limiter
 from .models import PromptRequest
 from .metrics import ollama_requests_total, ollama_errors_total, ollama_response_time
