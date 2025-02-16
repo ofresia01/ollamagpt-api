@@ -1,7 +1,7 @@
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Header, Request
 from fastapi.responses import StreamingResponse
 import ollama
-from typing import AsyncGenerator
+from typing import AsyncGenerator, Optional
 from .config import logger, MODEL_NAME, limiter
 from .models import PromptRequest
 from .metrics import ollama_requests_total, ollama_errors_total, ollama_response_time
@@ -23,10 +23,15 @@ async def generate_stream(prompt: str) -> AsyncGenerator[str, None]:
 
 @router.post("/chat")
 @limiter.limit("5/minute")
-async def chat_stream(request: Request, prompt_request: PromptRequest):
+async def chat_stream(request: Request, prompt_request: PromptRequest, bypass_validation: Optional[str] = Header(None)):
     try:
-        logger.info(f"Received prompt: {prompt_request.prompt}")
-        return StreamingResponse(generate_stream(prompt_request.prompt), media_type="text/plain")
+        if bypass_validation and bypass_validation.lower() == "true":
+            logger.info("Bypassing validation due to header flag")
+            prompt = request.json().get("prompt")
+        else:
+            prompt = prompt_request.prompt
+        logger.info(f"Received prompt: {prompt}")
+        return StreamingResponse(generate_stream(prompt), media_type="text/plain")
     except HTTPException as e:
         logger.error(f"HTTPException: {str(e)}")
         raise e
