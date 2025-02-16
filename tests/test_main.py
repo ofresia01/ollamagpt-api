@@ -69,7 +69,11 @@ def test_rate_limiting(mock_chat, mock_ollama_api):
     response = client.post("/chat", json=payload)
     assert response.status_code == 429  # Too Many Requests
 
-def test_health_check():
+@patch('src.app.routes.ollama.chat')
+def test_health_check(mock_chat, mock_ollama_api):
+    mock_chat.return_value = [
+        {"message": {"content": "Health check response"}}
+    ]
     response = client.get("/")
     assert response.status_code == 200
     assert response.json() == {"message": "Ollama FastAPI server is running!"}
