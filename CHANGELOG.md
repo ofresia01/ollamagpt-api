@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.0.0...v1.0.1) (2025-02-16)
+
+
+### Bug Fixes
+
+* **tag-deployment.yml:** renamed to release.yml, removed unnecessary permissions ([91b90fc](https://github.com/ofresia01/ollama-fastapi-rs/commit/91b90fc20f97e9ced5f42877ad837d94e7f4f8f6))
+
 # 1.0.0 (2025-02-16)
 
 
