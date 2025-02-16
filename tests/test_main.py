@@ -78,6 +78,10 @@ def test_health_check():
         assert response.json() == {"message": "Ollama FastAPI server is running!"}
 
 def test_post_chat_bypass_validation():
-    payload = {"prompt": "This should bypass validation."}
-    response = client.post("/chat", json=payload, headers={"bypass_validation": "true"})
-    assert response.status_code == 200
+    with patch('src.app.routes.ollama.chat') as mock_chat:
+        mock_chat.return_value = [
+            {"message": {"content": "Bypassed validation response"}}
+        ]
+        payload = {"prompt": "This should bypass validation."}
+        response = client.post("/chat", json=payload, headers={"bypass_validation": "true"})
+        assert response.status_code == 200
