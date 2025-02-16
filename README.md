@@ -68,29 +68,6 @@ The server exposes Prometheus metrics at the `/metrics` endpoint. These metrics 
 - `ollama_errors_total`: Total number of errors from Ollama.
 - `ollama_response_time`: Response time of Ollama requests.
 
-### Setting Up Prometheus
-
-1. **Download Prometheus**:
-    - Go to the [Prometheus download page](https://prometheus.io/download/) and download the appropriate binary for your operating system.
-
-2. **Extract Prometheus**:
-    - Extract the downloaded file to a directory of your choice.
-
-3. **Configure Prometheus**:
-    - Create a `prometheus.yml` configuration file in the project directory with the following content:
-      ```yaml
-      global:
-        scrape_interval: 15s
-
-      scrape_configs:
-        - job_name: 'fastapi'
-          static_configs:
-            - targets: ['localhost:8000']
-      ```
-
-4. **Run Prometheus**:
-    - Prometheus will be started automatically if the `<start-prometheus>` argument is set to `true` when running `start.sh`.
-
 ## Running Tests
 
 To run the Pytest unit tests, use the following command:
