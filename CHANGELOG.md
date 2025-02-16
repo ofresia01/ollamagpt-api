@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.0.1...v1.1.0) (2025-02-16)
+
+
+### Features
+
+* **bypass-validation:** added header as flag for bypassing input validation ([2822430](https://github.com/ofresia01/ollama-fastapi-rs/commit/28224304ba42bb49739401b6a35b426c2074e798))
+
 ## [1.0.1](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.0.0...v1.0.1) (2025-02-16)
 
 
