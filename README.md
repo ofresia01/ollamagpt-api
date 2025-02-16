@@ -1,6 +1,6 @@
 # Ollama FastAPI Server
 
-This project is a FastAPI server that integrates with Ollama's language model to provide a chat endpoint. The server supports streaming responses, allowing real-time interaction with the language model.
+This project is a FastAPI server that integrates with Ollama's Python API to provide a chat endpoint. The server supports streaming responses, allowing real-time interaction with the language model. It can also use Prometheus to gather some simple runtime/performance metrics.
 
 ## Requirements
 
@@ -21,14 +21,14 @@ This project is a FastAPI server that integrates with Ollama's language model to
 
 3. Create and activate a virtual environment, and install the dependencies:
     ```sh
-    ./setup.sh
+    scripts/setup.sh
     ```
 
 ## Running the Server
 
 To start the server, run the following command with optional arguments for the model name and whether to start Prometheus:
 ```sh
-./start.sh <model-name> <start-prometheus>
+scripts/start.sh <model-name> <start-prometheus>
 ```
 - `<model-name>`: The name of the model to use (default: `deepseek-r1:1.5b`).
 - `<start-prometheus>`: Set to `true` to start Prometheus, `false` otherwise (default: `true`).
@@ -78,5 +78,5 @@ This will execute the tests defined in the `tests` directory.
 
 To run some example Curl requests against the actively-running server, use the following command:
 ```sh
-./test_endpoints.sh
+scripts/test_endpoints.sh
 ```
