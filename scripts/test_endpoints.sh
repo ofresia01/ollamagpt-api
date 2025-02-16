@@ -15,3 +15,8 @@ echo -e "\n"
 
 curl -X POST "http://127.0.0.1:8000/chat" -H "accept: application/json" -H "Content-Type: application/json" -d '{"prompt": "Tell me a joke."}'
 echo -e "\n"
+
+# Test the chat endpoint with bypass_validation header
+echo "Testing the chat endpoint with bypass_validation header..."
+curl -X POST "http://127.0.0.1:8000/chat" -H "accept: application/json" -H "Content-Type: application/json" -H "bypass_validation: true" -d '{"prompt": "This should bypass validation."}'
+echo -e "\n"
