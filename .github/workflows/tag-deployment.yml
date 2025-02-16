@@ -28,10 +28,10 @@ jobs:
           node-version: 'lts/*'
 
       - name: Install dependencies
-        run: npm clean-install
+        run: npm install
 
       - name: Verify dependencies
-        run: npm audit signatures
+        run: npm audit
 
       - name: Tag release
         env:
