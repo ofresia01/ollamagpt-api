@@ -18,9 +18,11 @@ def mock_ollama_api():
         yield rsps
 
 def test_get_root():
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.json() == {"message": "Ollama FastAPI server is running!"}
+    with patch('src.app.routes.ollama.chat') as mock_chat:
+        mock_chat.return_value = [{"message": {"content": "Health check response"}}]
+        response = client.get("/")
+        assert response.status_code == 200
+        assert response.json() == {"message": "Ollama FastAPI server is running!"}
 
 @patch('src.app.routes.ollama.chat')
 def test_post_chat(mock_chat, mock_ollama_api):
@@ -69,11 +71,9 @@ def test_rate_limiting(mock_chat, mock_ollama_api):
     response = client.post("/chat", json=payload)
     assert response.status_code == 429  # Too Many Requests
 
-@patch('src.app.routes.ollama.chat')
-def test_health_check(mock_chat, mock_ollama_api):
-    mock_chat.return_value = [
-        {"message": {"content": "Health check response"}}
-    ]
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.json() == {"message": "Ollama FastAPI server is running!"}
+def test_health_check():
+    with patch('src.app.routes.ollama.chat') as mock_chat:
+        mock_chat.return_value = [{"message": {"content": "Health check response"}}]
+        response = client.get("/")
+        assert response.status_code == 200
+        assert response.json() == {"message": "Ollama FastAPI server is running!"}
