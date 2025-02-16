@@ -23,7 +23,7 @@ def load_system_prompt(file_path: str) -> str:
         logger.error(f"Error loading system prompt from {file_path}: {str(e)}")
         raise
 
-# Create the model on the executor
+# Create the model on the executor - executed at startup
 def create_model():
     try:
         system_prompt = load_system_prompt("prompts/default_system_prompt.txt")
@@ -33,4 +33,11 @@ def create_model():
         logger.error(f"Error creating model {MODEL_NAME}: {str(e)}")
         raise
 
-create_model()
+# Delete the model on the executor - executed at shutdown
+def delete_model():
+    try:
+        ollama.delete(model="ollama-fastapi-rs-model")
+        logger.info(f"Model {MODEL_NAME} deleted successfully.")
+    except Exception as e:
+        logger.error(f"Error deleting model {MODEL_NAME}: {str(e)}")
+        raise
