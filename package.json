@@ -1,0 +1,29 @@
+{
+  "name": "ollama-fastapi-rs",
+  "version": "1.0.0",
+  "description": "This project is a FastAPI server that integrates with Ollama's language model to provide a chat endpoint. The server supports streaming responses, allowing real-time interaction with the language model.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ofresia01/ollama-fastapi-rs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ofresia01/ollama-fastapi-rs/issues"
+  },
+  "homepage": "https://github.com/ofresia01/ollama-fastapi-rs#readme",
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.1",
+    "semantic-release": "^24.2.3"
+  }
+}
