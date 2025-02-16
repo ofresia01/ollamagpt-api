@@ -1,7 +1,6 @@
 from fastapi.testclient import TestClient
 from src.app.main import app
 import pytest
-import responses
 from unittest.mock import patch
 
 client = TestClient(app)
@@ -11,20 +10,9 @@ def reset_rate_limit():
     # Reset the rate limit state before each test
     app.state.limiter.reset()
 
-@pytest.fixture
-def mock_ollama_api():
-    with responses.RequestsMock() as rsps:
-        yield rsps
-
-def test_get_root():
-    with patch('src.app.routes.ollama.chat') as mock_chat:
-        mock_chat.return_value = [{"message": {"content": "Health check response"}}]
-        response = client.get("/")
-        assert response.status_code == 200
-        assert response.json() == {"message": "Ollama FastAPI server is running!"}
-
 @patch('src.app.routes.ollama.chat')
-def test_post_chat(mock_chat, mock_ollama_api):
+@patch('src.app.config.create_model')
+def test_post_chat(mock_create_model, mock_chat):
     mock_chat.return_value = [
         {"message": {"content": "Hello, user!"}},
         {"message": {"content": "How can I help you?"}}
@@ -56,7 +44,8 @@ def test_post_chat_validation():
     assert response.status_code == 422  # Unprocessable Entity
 
 @patch('src.app.routes.ollama.chat')
-def test_rate_limiting(mock_chat, mock_ollama_api):
+@patch('src.app.config.create_model')
+def test_rate_limiting(mock_create_model, mock_chat):
     mock_chat.return_value = [
         {"message": {"content": "Hello, user!"}}
     ]
@@ -70,18 +59,20 @@ def test_rate_limiting(mock_chat, mock_ollama_api):
     response = client.post("/chat", json=payload)
     assert response.status_code == 429  # Too Many Requests
 
-def test_health_check():
-    with patch('src.app.routes.ollama.chat') as mock_chat:
-        mock_chat.return_value = [{"message": {"content": "Health check response"}}]
-        response = client.get("/")
-        assert response.status_code == 200
-        assert response.json() == {"message": "Ollama FastAPI server is running!"}
+@patch('src.app.routes.ollama.chat')
+@patch('src.app.config.create_model')
+def test_health_check(mock_create_model, mock_chat):
+    mock_chat.return_value = [{"message": {"content": "Health check response"}}]
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"message": "Ollama FastAPI server is running!"}
 
-def test_post_chat_bypass_validation():
-    with patch('src.app.routes.ollama.chat') as mock_chat:
-        mock_chat.return_value = [
-            {"message": {"content": "Bypassed validation response"}}
-        ]
-        payload = {"prompt": "This should bypass validation."}
-        response = client.post("/chat", json=payload, headers={"bypass_validation": "true"})
-        assert response.status_code == 200
+@patch('src.app.routes.ollama.chat')
+@patch('src.app.config.create_model')
+def test_post_chat_bypass_validation(mock_create_model, mock_chat):
+    mock_chat.return_value = [
+        {"message": {"content": "Bypassing validation response"}}
+    ]
+    payload = {"prompt": "This should bypass validation."}
+    response = client.post("/chat", json=payload, headers={"bypass_validation": "true"})
+    assert response.status_code == 200

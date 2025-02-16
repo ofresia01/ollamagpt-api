@@ -13,15 +13,6 @@ export OLLAMA_MODEL=$MODEL
 
 # Function to clean up background processes
 cleanup() {
-    if [ -n "$OLLAMA_PID" ] && ps -p $OLLAMA_PID > /dev/null; then
-        echo "Stopping Ollama process..."
-        kill $OLLAMA_PID
-        wait $OLLAMA_PID
-        echo "Ollama process stopped."
-    else
-        echo "Ollama process already stopped or PID not set."
-    fi
-
     if [ -n "$PROMETHEUS_PID" ] && ps -p $PROMETHEUS_PID > /dev/null; then
         echo "Stopping Prometheus process..."
         kill $PROMETHEUS_PID
@@ -34,11 +25,6 @@ cleanup() {
 
 # Set trap to catch termination signals and clean up
 trap cleanup EXIT
-
-# Run the Ollama command in a separate process
-ollama run $MODEL &
-OLLAMA_PID=$!
-echo "Ollama process started with PID $OLLAMA_PID"
 
 # Check if Prometheus should be started
 START_PROMETHEUS=${2:-true}
