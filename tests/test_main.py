@@ -11,8 +11,8 @@ def reset_rate_limit():
     app.state.limiter.reset()
 
 @patch('src.app.routes.ollama.chat')
-@patch('src.app.config.ollama.create')
-def test_post_chat(mock_create, mock_chat):
+@patch('src.app.config.create_model')
+def test_post_chat(mock_create_model, mock_chat):
     mock_chat.return_value = [
         {"message": {"content": "Hello, user!"}},
         {"message": {"content": "How can I help you?"}}
@@ -44,8 +44,8 @@ def test_post_chat_validation():
     assert response.status_code == 422  # Unprocessable Entity
 
 @patch('src.app.routes.ollama.chat')
-@patch('src.app.config.ollama.create')
-def test_rate_limiting(mock_create, mock_chat):
+@patch('src.app.config.create_model')
+def test_rate_limiting(mock_create_model, mock_chat):
     mock_chat.return_value = [
         {"message": {"content": "Hello, user!"}}
     ]
@@ -60,16 +60,16 @@ def test_rate_limiting(mock_create, mock_chat):
     assert response.status_code == 429  # Too Many Requests
 
 @patch('src.app.routes.ollama.chat')
-@patch('src.app.config.ollama.create')
-def test_health_check(mock_create, mock_chat):
+@patch('src.app.config.create_model')
+def test_health_check(mock_create_model, mock_chat):
     mock_chat.return_value = [{"message": {"content": "Health check response"}}]
     response = client.get("/")
     assert response.status_code == 200
     assert response.json() == {"message": "Ollama FastAPI server is running!"}
 
 @patch('src.app.routes.ollama.chat')
-@patch('src.app.config.ollama.create')
-def test_post_chat_bypass_validation(mock_create, mock_chat):
+@patch('src.app.config.create_model')
+def test_post_chat_bypass_validation(mock_create_model, mock_chat):
     mock_chat.return_value = [
         {"message": {"content": "Bypassing validation response"}}
     ]
