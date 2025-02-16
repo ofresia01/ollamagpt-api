@@ -76,3 +76,8 @@ def test_health_check():
         response = client.get("/")
         assert response.status_code == 200
         assert response.json() == {"message": "Ollama FastAPI server is running!"}
+
+def test_post_chat_bypass_validation():
+    payload = {"prompt": "This should bypass validation."}
+    response = client.post("/chat", json=payload, headers={"bypass_validation": "true"})
+    assert response.status_code == 200
