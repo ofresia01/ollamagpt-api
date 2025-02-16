@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.1.0...v1.2.0) (2025-02-16)
+
+
+### Features
+
+* **model-lifecycle:** added functions for creating and deleting the model, handled by fastapi context manager ([50b3822](https://github.com/ofresia01/ollama-fastapi-rs/commit/50b38221403b5d339afc50b1388ea6d26be94d8b))
+* **programmatic-model-creation:** creating ollama model with ollama api, with parameterized system prompts ([8e08675](https://github.com/ofresia01/ollama-fastapi-rs/commit/8e08675d7eaa756fa134e8a700ea225d58463a70))
+
 # [1.1.0](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.0.1...v1.1.0) (2025-02-16)
 
 
