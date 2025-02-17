@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.3.0...v1.3.1) (2025-02-17)
+
+
+### Bug Fixes
+
+* **routes.py:** correctly propagating exception in chat_stream and root, awaiting call to request.json() ([f637a05](https://github.com/ofresia01/ollama-fastapi-rs/commit/f637a0598fd64aeedf7ade1265402ecc151ccbf6))
+
 # [1.3.0](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.2.0...v1.3.0) (2025-02-17)
 
 
