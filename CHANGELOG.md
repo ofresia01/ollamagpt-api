@@ -1,3 +1,17 @@
+# [1.3.0](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.2.0...v1.3.0) (2025-02-17)
+
+
+### Bug Fixes
+
+* **main.py:** binded custom lifecycle to fastapi app, corrected pathing of ollama utility calls ([7a61378](https://github.com/ofresia01/ollama-fastapi-rs/commit/7a61378bcf868842e2e0108ba56df49803d8013e))
+* **ollama_utils:** corrected quotes syntax in downloading/tqdm logic ([0d30805](https://github.com/ofresia01/ollama-fastapi-rs/commit/0d308054ddd4f385d7d486d9f3b063283bc43c70))
+* **routes.py:** corrected imports for logger, model name, and rate limiter ([5256aa5](https://github.com/ofresia01/ollama-fastapi-rs/commit/5256aa5876de657fddbf391b68b87a1bfc41c679))
+
+
+### Features
+
+* **model-lifecycle:** added handling for automatic creation, deletion, and downloading of ollama models ([0fe15e1](https://github.com/ofresia01/ollama-fastapi-rs/commit/0fe15e138c409db5b7639775628e02ccd2cc8759))
+
 # [1.2.0](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.1.0...v1.2.0) (2025-02-16)
 
 
