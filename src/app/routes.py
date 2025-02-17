@@ -28,15 +28,12 @@ async def chat_stream(request: Request, prompt_request: PromptRequest, bypass_va
     try:
         if bypass_validation and bypass_validation.lower() == "true":
             logger.info("Bypassing validation due to header flag")
-            prompt = request.json().get("prompt")
+            prompt = (await request.json()).get("prompt")
         else:
             prompt = prompt_request.prompt
         logger.info(f"Received prompt: {prompt}")
         return StreamingResponse(generate_stream(prompt), media_type="text/plain")
     except HTTPException as e:
-        logger.error(f"HTTPException: {str(e)}")
-        raise e
-    except Exception as e:
         logger.error(f"Exception: {str(e)}")
         raise HTTPException(status_code=500, detail="Error processing prompt")
 
@@ -50,7 +47,7 @@ def root():
             return {"message": "Ollama FastAPI server is running!"}
         else:
             logger.error("Ollama server is not responding")
-            raise HTTPException(status_code=500, detail="Ollama server is not responding")
+            raise HTTPException
     except Exception as e:
         logger.error(f"Health check failed: {str(e)}")
         raise HTTPException(status_code=500, detail="Health check failed")
