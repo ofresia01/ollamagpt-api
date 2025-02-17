@@ -2,7 +2,8 @@ from fastapi import APIRouter, HTTPException, Header, Request
 from fastapi.responses import StreamingResponse
 import ollama
 from typing import AsyncGenerator, Optional
-from .config import logger, MODEL_NAME, limiter
+from .config import logger, limiter
+from .ollama_utils import MODEL_NAME
 from .models import PromptRequest
 from .metrics import ollama_requests_total, ollama_errors_total, ollama_response_time
 import time
