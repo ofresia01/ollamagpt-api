@@ -80,12 +80,12 @@ def download_model(model_name: str) -> None:
                 bars[current_digest].close()
 
             if not digest:
-                logger.info(f"Downloading {model_name}, status: {progress.get("status")}")
+                logger.info(f"Downloading {model_name}, status: {progress.get('status')}")
 
-            if digest not in bars and (total := progress.get("total")):
-                bars[digest] = tqdm(total=total, desc=f"Pulling digest {digest[7:19]}', unit='B', unit_scale=True")
+            if digest not in bars and (total := progress.get('total')):
+                bars[digest] = tqdm(total=total, desc=f"Pulling digest {digest[7:19]}", unit='B', unit_scale=True)
 
-            if completed := progress.get("completed"):
+            if completed := progress.get('completed'):
                 bars[digest].update(completed - bars[digest].n)
             current_digest = digest
         logger.info(f"Model {model_name} downloaded successfully.")
