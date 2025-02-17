@@ -73,8 +73,20 @@ def test_model_present_exception(mock_ollama_list):
     mock_ollama_list.assert_called_once()
 
 @patch("src.app.ollama_utils.tqdm")
-@patch("src.app.ollama_utils.ollama.pull", return_value=[{"digest": "digest_1234567890", "total": 100, "completed": 50}])
+@patch("src.app.ollama_utils.ollama.pull", return_value=[
+    {"digest": "digest_1234567890", "total": 100, "completed": 50},
+    {"digest": "", "status": "in progress"},
+    {"digest": "digest_0987654321", "total": 200, "completed": 100}
+])
 def test_download_model(mock_ollama_pull, mock_tqdm):
     download_model("deepseek-r1:1.5b")
     mock_ollama_pull.assert_called_once_with(model="deepseek-r1:1.5b", stream=True)
-    mock_tqdm.assert_called_once_with(total=100, desc="Pulling digest 1234567890", unit='B', unit_scale=True)
+    assert mock_tqdm.call_count == 2
+    mock_tqdm.assert_any_call(total=100, desc="Pulling digest 1234567890", unit='B', unit_scale=True)
+    mock_tqdm.assert_any_call(total=200, desc="Pulling digest 0987654321", unit='B', unit_scale=True)
+
+@patch("src.app.ollama_utils.ollama.pull", side_effect=Exception("Download error"))
+def test_download_model_exception(mock_ollama_pull):
+    with raises(Exception, match="Download error"):
+        download_model("deepseek-r1:1.5b")
+    mock_ollama_pull.assert_called_once_with(model="deepseek-r1:1.5b", stream=True)
