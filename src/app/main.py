@@ -4,10 +4,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from slowapi.errors import RateLimitExceeded
 from prometheus_fastapi_instrumentator import Instrumentator
-from .config import create_model, delete_model, limiter
+from .config import limiter
+from .ollama_utils import create_model, delete_model
 from .routes import router
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_model() # Create the model on startup
+    yield
+    delete_model() # Delete the model on shutdown
+
+app = FastAPI(lifespan=lifespan)
 
 app.state.limiter = limiter
 
@@ -27,12 +34,6 @@ app.add_middleware(
 )
 
 app.include_router(router)
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    create_model() # Create the model on startup
-    yield
-    delete_model() # Delete the model on shutdown
 
 # Instrument FastAPI application
 Instrumentator().instrument(app).expose(app)
