@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.3.1...v1.3.2) (2025-02-22)
+
+
+### Bug Fixes
+
+* **async:** awaiting async chat request in root endpoint ([c75579b](https://github.com/ofresia01/ollama-fastapi-rs/commit/c75579bee9a4c85ed1c463e242c8ab11d82e94c8))
+
 ## [1.3.1](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.3.0...v1.3.1) (2025-02-17)
 
 
