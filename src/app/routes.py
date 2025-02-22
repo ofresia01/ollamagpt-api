@@ -38,10 +38,10 @@ async def chat_stream(request: Request, prompt_request: PromptRequest, bypass_va
         raise HTTPException(status_code=500, detail="Error processing prompt")
 
 @router.get("/")
-def root():
+async def root():
     try:
         test_prompt = "Health check"
-        response = AsyncClient().chat(model=SESSION_MODEL_NAME, messages=[{"role": "user", "content": test_prompt}], stream=False)
+        response = await AsyncClient().chat(model=SESSION_MODEL_NAME, messages=[{"role": "user", "content": test_prompt}], stream=False)
         if response:
             logger.info("Ollama server is running")
             return {"message": "Ollama FastAPI server is running!"}
