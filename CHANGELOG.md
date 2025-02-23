@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.3.2...v1.3.3) (2025-02-23)
+
+
+### Bug Fixes
+
+* **cors:** allowing all origins ([9385545](https://github.com/ofresia01/ollama-fastapi-rs/commit/9385545139f9ebacf91203aaca3713db0b075b77))
+
 ## [1.3.2](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.3.1...v1.3.2) (2025-02-22)
 
 
