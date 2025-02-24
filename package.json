@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ofresia01/ollama-fastapi-rs.git"
+    "url": "git+https://github.com/ofresia01/ollamagpt-api.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ofresia01/ollama-fastapi-rs/issues"
+    "url": "https://github.com/ofresia01/ollamagpt-api/issues"
   },
-  "homepage": "https://github.com/ofresia01/ollama-fastapi-rs#readme",
+  "homepage": "https://github.com/ofresia01/ollamagpt-api#readme",
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
