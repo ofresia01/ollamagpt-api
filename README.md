@@ -12,17 +12,26 @@ This project is a FastAPI server that integrates with Ollama's Python API to pro
 
 1. Clone the repository:
     ```sh
-    git clone <repository-url>
-    cd <repository-directory>
+    git clone https://github.com/ofresia01/ollamagpt-api.git
+    cd ollamagpt-api
     ```
 
 2. Install the Ollama CLI:
     Follow the instructions on the [Ollama website](https://ollama.com) to install Ollama
 
 3. Create and activate a virtual environment, and install the dependencies:
-    ```sh
-    scripts/setup.sh
-    ```
+    * Windows:
+        * ```sh
+          python -m venv venv
+          source venv/Scripts/activate
+          pip install -r requirements.txt
+          ```
+    * Mac/Linux
+      * ```sh
+        python -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+        ```
 
 ## Running the Server
 
