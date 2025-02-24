@@ -28,13 +28,13 @@ def create_model():
     try:
         if model_present(BASE_MODEL_NAME):
             system_prompt = load_system_prompt("prompts/default_system_prompt.txt")
-            ollama.create(model="ollama-fastapi-rs-model", from_=BASE_MODEL_NAME, system=system_prompt)
+            ollama.create(model=SESSION_MODEL_NAME, from_=BASE_MODEL_NAME, system=system_prompt)
             logger.info(f"Model {SESSION_MODEL_NAME} created successfully.")
         else:
             logger.warning(f"Model {BASE_MODEL_NAME} is not present. Downloading base model...")
             download_model(BASE_MODEL_NAME)
             system_prompt = load_system_prompt("prompts/default_system_prompt.txt")
-            ollama.create(model="ollama-fastapi-rs-model", from_=BASE_MODEL_NAME, system=system_prompt)
+            ollama.create(model=SESSION_MODEL_NAME, from_=BASE_MODEL_NAME, system=system_prompt)
             logger.info(f"Model {SESSION_MODEL_NAME} created successfully after downloading {BASE_MODEL_NAME}.")
     except Exception as e:
         logger.error(f"Error creating model {SESSION_MODEL_NAME}: {str(e)}")
