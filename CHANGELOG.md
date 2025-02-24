@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/ofresia01/ollamagpt-api/compare/v1.3.3...v1.3.4) (2025-02-24)
+
+
+### Bug Fixes
+
+* **ollama-utils:** correctly using constant session model name in create_model() ([5352a9c](https://github.com/ofresia01/ollamagpt-api/commit/5352a9cffdc4659b0d47ce8b68af4b418f8b0fc5))
+
 ## [1.3.3](https://github.com/ofresia01/ollama-fastapi-rs/compare/v1.3.2...v1.3.3) (2025-02-23)
 
 
